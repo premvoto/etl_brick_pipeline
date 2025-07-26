@@ -1,0 +1,4 @@
+pytest
+azure-identity
+azure-keyvault-secrets
+databricks-cli

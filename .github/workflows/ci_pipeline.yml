@@ -1,0 +1,46 @@
+name: Databricks CI/CD
+
+on:
+  push:
+    paths:
+      - 'notebooks/**'
+      - 'tests/**'
+      - 'requirements.txt'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install azure-identity azure-keyvault-secrets
+
+    - name: Run unit tests
+      run: |
+        pytest tests
+
+    - name: Install Databricks CLI
+      run: pip install databricks-cli
+
+    - name: Configure Databricks CLI using Azure Key Vault
+      run: |
+        python -c "import json; from azure.identity import DefaultAzureCredential; from azure.keyvault.secrets import SecretClient; vault_url = 'https://premkeyvlt.vault.azure.net'; credential = DefaultAzureCredential(); client = SecretClient(vault_url=vault_url, credential=credential); config = json.loads(client.get_secret('run-config').value); import os; os.makedirs('/home/runner/.databricks', exist_ok=True); with open('/home/runner/.databricks/config', 'w') as f: f.write(f'[DEFAULT]\\nhost = {config[\"databricks_host\"]}\\ntoken = {config[\"databricks_token\"]}\\n')"
+
+    - name: Upload notebook to Databricks Workspace
+      run: |
+        databricks workspace import notebooks/ingest_data.py /Users/rajnees1173@outlook.com/ingest_data -l PYTHON -f SOURCE
+
+    - name: Run Databricks Job
+      run: |
+        databricks jobs run-now --job-id 688315178708804 || echo "Manual job trigger or add job creation logic"
