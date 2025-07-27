@@ -39,6 +39,10 @@ jobs:
       run: pip install databricks-cli
 
     - name: Configure Databricks CLI using Azure Key Vault
+      env:
+        AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+        AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       run: |
         python scripts/set_config.py
 
