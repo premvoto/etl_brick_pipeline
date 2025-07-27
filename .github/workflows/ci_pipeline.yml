@@ -47,9 +47,13 @@ jobs:
         python scripts/set_config.py
 
     - name: Upload notebook to Databricks Workspace
+      env:
+        DATABRICKS_CONFIG_FILE: /home/runner/.databricks/config
       run: |
         databricks workspace import notebooks/ingest_data.py /Users/rajnees1173@outlook.com/ingest_data -l PYTHON -f SOURCE
 
     - name: Run Databricks Job
+      env:
+        DATABRICKS_CONFIG_FILE: /home/runner/.databricks/config
       run: |
         databricks jobs run-now --job-id 688315178708804 || echo "Manual job trigger or add job creation logic"
