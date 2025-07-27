@@ -37,8 +37,7 @@ jobs:
       run: pip install databricks-cli
 
     - name: Configure Databricks CLI using Azure Key Vault
-      run:  |
-        python scripts/set_config.py
+      run: python scripts/set_config.py
              
 
     - name: Upload notebook to Databricks Workspace
