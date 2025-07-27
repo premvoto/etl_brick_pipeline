@@ -37,8 +37,9 @@ jobs:
       run: pip install databricks-cli
 
     - name: Configure Databricks CLI using Azure Key Vault
-      run: |
-        python -c "import json; from azure.identity import DefaultAzureCredential; from azure.keyvault.secrets import SecretClient; vault_url = 'https://premkeyvlt.vault.azure.net'; credential = DefaultAzureCredential(); client = SecretClient(vault_url=vault_url, credential=credential); config = json.loads(client.get_secret('run-config').value); import os; os.makedirs('/home/runner/.databricks', exist_ok=True); with open('/home/runner/.databricks/config', 'w') as f: f.write(f'[DEFAULT]\\nhost = {config[\"databricks_host\"]}\\ntoken = {config[\"databricks_token\"]}\\n')"
+      run:  |
+        python scripts/set_config.py
+             #python -c "import json; from azure.identity import DefaultAzureCredential; from azure.keyvault.secrets import SecretClient; vault_url = 'https://premkeyvlt.vault.azure.net'; credential = DefaultAzureCredential(); client = SecretClient(vault_url=vault_url, credential=credential); config = json.loads(client.get_secret('run-config').value); import os; os.makedirs('/home/runner/.databricks', exist_ok=True); with open('/home/runner/.databricks/config', 'w') as f: f.write(f'[DEFAULT]\\nhost = {config[\"databricks_host\"]}\\ntoken = {config[\"databricks_token\"]}\\n')"
 
     - name: Upload notebook to Databricks Workspace
       run: |
