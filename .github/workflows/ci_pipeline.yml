@@ -68,7 +68,7 @@ jobs:
       env:
         DATABRICKS_CONFIG_FILE: /home/runner/.databricks/config
       run: |
-        databricks workspace import notebooks/ingest_data.py /Users/rajnees1173@outlook.com/ingest_data -language PYTHON --overwrite -format SOURCE
+        databricks workspace import notebooks/ingest_data.py /Users/rajnees1173@outlook.com/ingest_data -language PYTHON -format SOURCE --overwrite
 
     - name: Run Databricks Job
       env:
