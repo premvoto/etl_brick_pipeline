@@ -45,6 +45,24 @@ jobs:
         AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       run: |
         python scripts/set_config.py
+      
+    - name: Archive pipeline logs to Azure Blob
+      run: |
+        mkdir -p logs
+        echo "Pipeline executed on: $(date)" >> logs/pipeline_log.txt
+        echo "Workflow finished." >> logs/pipeline_log.txt
+        
+        echo "Installing Azure CLI..."
+        curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+        echo "Uploading log to Azure Blob..."
+        az storage blob upload \
+          --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} \
+          --account-key ${{ secrets.AZURE_STORAGE_KEY1 }} \
+          --container-name prem-csv-logs-container \
+          --file logs/pipeline_log.txt \
+          --name pipeline_log_$(date +%s).txt
+
 
     - name: Upload notebook to Databricks Workspace
       env:
