@@ -67,8 +67,8 @@ jobs:
 
     - name: send logs to azure log analytics
       env:
-        WORKPACE_ID: ${{secrets.PREM_WORKSPACEID_LOGS}}
-        SHARED_KEY: ${{secrets.PREM_ETLPPIPELINE_LOGS}}
+        WORKPACE_ID: ${{secrets.PREM_WORKSPACE_ID}}
+        SHARED_KEY: ${{secrets.PREM_LOGS_ID}}
       run: |
         python Logs/send_logs.py
     - name: Upload notebook to Databricks Workspace
