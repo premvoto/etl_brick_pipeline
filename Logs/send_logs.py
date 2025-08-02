@@ -11,8 +11,8 @@ workspace_id = os.getenv("WORKSPACE_ID")
 shared_key = os.getenv("SHARED_KEY")
 log_type = "PipelineLogs"
 
-if not workspace_id or not shared_key:
-    raise ValueError("Workspace ID or Shared Key not found in environment variables.")
+#if not workspace_id or not shared_key:
+ #   raise ValueError("Workspace ID or Shared Key not found in environment variables.")
 
 # Load log file
 with open("logs/pipeline_log.txt", "r") as file:
