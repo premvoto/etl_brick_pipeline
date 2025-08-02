@@ -31,7 +31,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install azure-identity azure-keyvault-secrets
+        pip install azure-identity azure-keyvault-secrets requests
 
     - name: Run unit tests
       run: |
@@ -65,7 +65,7 @@ jobs:
           --file logs/pipeline_log.txt \
           --name pipeline_log_$(date +%s).txt
 
-    - name: send logs to azure log analytics
+    - name: send logs to Azure Log Analytics
       env:
         WORKPACE_ID: ${{secrets.PREM_WORKSPACE_ID}}
         SHARED_KEY: ${{secrets.PREM_LOGS_ID}}
