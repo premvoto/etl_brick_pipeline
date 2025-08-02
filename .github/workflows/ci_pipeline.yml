@@ -65,7 +65,12 @@ jobs:
           --file logs/pipeline_log.txt \
           --name pipeline_log_$(date +%s).txt
 
-
+    - name: send logs to azure log analytics
+      env:
+        WORKPACE_ID: ${{secrets.PREM_WORKSPACEID_LOGS}}
+        SHARED_KEY: ${{secrets.PREM_ETLPPIPELINE_LOGS}}
+      run: |
+        python Logs/send_logs.py
     - name: Upload notebook to Databricks Workspace
       env:
         DATABRICKS_CONFIG_FILE: /home/runner/.databricks/config
