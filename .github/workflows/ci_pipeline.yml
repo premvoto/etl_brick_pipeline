@@ -5,11 +5,14 @@ name: Databricks CI/CD
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'notebooks/**'
       - 'tests/**'
       - 'requirements.txt'
       - '.github/workflows/ci_pipeline.yml'
+      - 'trigger.txt'
   
   schedule:
     - cron: '0 9 * * *'  
