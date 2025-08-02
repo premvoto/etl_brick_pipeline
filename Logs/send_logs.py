@@ -7,8 +7,8 @@ import hmac
 import base64
 
 # Get workspace ID and shared key from environment variables
-workspace_id = os.getenv("PREM_WORKSPACE_ID")
-shared_key = os.getenv("PREM_LOGS_ID")
+workspace_id = os.getenv("WORKSPACE_ID")
+shared_key = os.getenv("SHARED_KEY")
 log_type = "PipelineLogs"
 
 if not workspace_id or not shared_key:
