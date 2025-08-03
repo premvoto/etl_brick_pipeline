@@ -3,7 +3,6 @@
 This project showcases a complete data pipeline built using **Databricks**, **Azure Storage**, **GitHub Actions**, and **Log Analytics**, focusing on **automation**, **data quality**, and **observability**. The pipeline is built to ingest, transform, validate, deploy, and monitor data with zero manual intervention.
 
 ---
-
 ##  What This Project Implements
 
 ### 🔹 Data Ingestion & Processing
@@ -37,7 +36,6 @@ This streamlines development, testing, and deployment without manual steps.
 - No sensitive data is hardcoded—values are passed as environment variables in the pipeline.
 
 ---
-
 ## Tech Stack
 
 - **Azure Blob Storage (ADLS Gen2)** – raw data storage
@@ -57,3 +55,15 @@ This streamlines development, testing, and deployment without manual steps.
 - Created an **audit trail** with log archiving to Azure Blob and real-time insights via **Log Analytics**
 - Ensured **enterprise-level security** using GitHub Secrets to handle all credentials securely
 - Leveraged **PySpark and Databricks** to build scalable and reliable transformation workflows
+
+## Repository Structure (Overview)
+
+```text
+.github/workflows/           # Contains the GitHub Actions CI/CD YAML pipeline
+config/                      # Configuration files or environment-specific settings
+Logs/                        # Python log sender script and pipeline logs
+notebooks/                   # Databricks notebooks for data transformation and validation
+scripts/                     # Python scripts (e.g., setting up Databricks config)
+tests/                       # Unit tests written in pytest
+requirements.txt             # Python package dependencies
+trigger.txt                  # Dummy file to trigger workflow manually
