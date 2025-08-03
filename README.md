@@ -4,7 +4,7 @@ This project showcases a complete data pipeline built using **Databricks**, **Az
 
 ---
 
-##  What I Built & Why It Matters
+##  What This Project Implements
 
 ### 🔹 Data Ingestion & Processing
 - Ingested CSV files from **Azure Data Lake Storage Gen2** using a Python script.
@@ -49,10 +49,11 @@ This streamlines development, testing, and deployment without manual steps.
 
 ---
 
-## Key Outcomes
+# Key Outcomes & Solutions Delivered
 
-- Fully **automated ETL pipeline**
-- **Data quality** checks built into transformation layer
-- **CI/CD integration** ensures fast, safe deployments
-- **Real-time monitoring** with centralized logging
-- **Secure architecture** with encrypted secret handling
+- Built a **fully automated ETL pipeline** from ingestion to deployment
+- Implemented **CI/CD using GitHub Actions** to streamline testing and notebook deployment
+- Added **data validation** with SQL for integrity and quality checks
+- Created an **audit trail** with log archiving to Azure Blob and real-time insights via **Log Analytics**
+- Ensured **enterprise-level security** using GitHub Secrets to handle all credentials securely
+- Leveraged **PySpark and Databricks** to build scalable and reliable transformation workflows
